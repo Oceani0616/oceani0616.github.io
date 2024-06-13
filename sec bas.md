@@ -16,9 +16,11 @@ tags:
 
 You find my secret base. 
 
-Enjoy your music.
+Enjoy your Reward Music.
 
-<p>http://rufjbtt1f.hb-bkt.clouddn.com/Oltremare.mp3</p>
+<audio controls>
+  <source src="/assets/music/Aliosha_Noodle Reunion.mp3" type="audio/mp3">
+</audio>
 
 
 

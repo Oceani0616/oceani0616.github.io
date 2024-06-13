@@ -3,7 +3,7 @@
 ## 聴け！我が歌を！
 
 <audio controls>
-  <source src="/assets/music/春よ、来い - 拉面儿.mp3" type="audio/mp3">
+  <source src="/assets/music/Spring comes (Jap Song).mp3" type="audio/mp3">
 </audio>
 
 ## よし！見るがいい！
