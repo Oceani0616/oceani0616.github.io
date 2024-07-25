@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    {% include nav.html %}
+    {% include search.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+
+<!-- Image to hack wechat -->
+<img src="/img/alita_icon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+<!-- net special effect -->
+<if condition="$window.screen.availWidth gt 768">
+    <script src=" /js/topo_mag_net.js"></script>
+</if>
+
+
+<!-- mp3 player from outside link -->
+<script src=" /js/jquery.min.js"></script> 
+{% include open-embed.html %}
+
+
+<script>
+    function detectOS() {
+        let os = "Unknown";
+        if (navigator.appVersion.indexOf("Win") !== -1) os = "Windows";
+        if (navigator.appVersion.indexOf("Mac") !== -1) os = "MacOS";
+        return os;
+    }
+
+    function detectColorScheme() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return "dark";
+        }
+        return "light";
+    }
+
+    function createToggleButton() {
+        let button = document.createElement("button");
+        button.innerHTML = "Let Night Falls";
+        button.style.position = "fixed";
+        button.style.bottom = "10px";
+        button.style.right = "10px";
+        button.style.padding = "10px";
+        button.style.zIndex = "1000";
+
+        button.onclick = function () {
+            let body = document.body;
+            if (body.style.backgroundColor === "black") {
+                body.style.backgroundColor = "white";
+                body.style.color = "black";
+            } else {
+                body.style.backgroundColor = "black";
+                body.style.color = "white";
+            }
+        };
+
+        document.body.appendChild(button);
+    }
+
+    function handleMacUser() {
+        let colorScheme = detectColorScheme();
+        if (colorScheme === "dark") {
+            createToggleButton();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let os = detectOS();
+        if (os === "MacOS") {
+            handleMacUser();
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
+<!-- 看板娘特效
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+-->
+
+
+
+
+

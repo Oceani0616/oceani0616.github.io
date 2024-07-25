@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+    <meta name="google-site-verification" content="Zh3hNfE18fPyIEoGjgSuXckolz3Inr3cFSQYJ9UxS2U" />
+</head>
+{% include head.html %}
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="">
+
+    {% include nav.html %}
+    {% include search.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+    <!-- Image to hack wechat -->
+    <img src="/img/alita_icon.ico" width="0" height="0" />
+    <!-- Migrate from head to bottom, no longer block render and still work -->
+
+    <!-- net special effect -->
+    <if condition="$window.screen.availWidth gt 768">
+        <script src="/js/topo_mag_net.js"></script>
+    </if>
+
+    <!-- mp3 player from outside link -->
+    <script src="/js/jquery.min.js"></script>
+    {% include open-embed.html %}
+
+<style>
+    @keyframes lightsOut {
+        0% {
+            background-color: white;
+            opacity: 1;
+        }
+
+        50% {
+            background-color: #333;
+            opacity: 0.5;
+        }
+
+        100% {
+            background-color: black;
+            opacity: 1;
+        }
+    }
+
+    .dark-mode-transition {
+        animation: lightsOut 1s forwards;
+    }
+
+    .dark-mode {
+        background-image: url('/img/blacat_bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    .cyberpunk-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 30px;
+        color: #0ff;
+        background-color: #222;
+        border: 2px solid #0ff;
+        border-radius: 5px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+        display: none;
+    }
+
+    .cyberpunk-button:hover {
+        background-color: #0ff;
+        color: #222;
+        box-shadow: 0 0 30px #0ff, 0 0 50px #0ff, 0 0 70px #0ff;
+    }
+
+    @keyframes flicker {
+
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+            opacity: 1;
+        }
+
+        20%,
+        24%,
+        55% {
+            opacity: 0;
+        }
+    }
+
+    .cyberpunk-button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid #0ff;
+        box-shadow: 0 0 20px #0ff;
+        opacity: 0.6;
+        animation: flicker 1.5s infinite alternate;
+    }
+
+    .show-button {
+        display: block !important;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 999;
+    }
+</style>
+
+
+<script>
+    function detectOS() {
+        let os = "Unknown";
+        if (navigator.appVersion.indexOf("Win") !== -1) os = "Windows";
+        if (navigator.appVersion.indexOf("Mac") !== -1) os = "MacOS";
+        return os;
+    }
+
+    function createToggleButton() {
+        let button = document.createElement("button");
+        button.innerHTML = "Let Night Fall";
+        button.className = "cyberpunk-button";
+
+        button.onclick = function () {
+            let body = document.body;
+            if (body.classList.contains("dark-mode")) {
+                body.classList.remove("dark-mode");
+                body.style.backgroundColor = "white";
+                body.style.color = "black";
+            } else {
+                body.classList.add("dark-mode-transition");
+                setTimeout(() => {
+                    body.classList.remove("dark-mode-transition");
+                    body.classList.add("dark-mode");
+                    body.style.backgroundColor = "black";
+                    body.style.color = "white";
+                }, 1000); // 与动画时间一致
+            }
+        };
+
+        document.body.appendChild(button);
+    }
+
+    function handleMacUser() {
+        createToggleButton();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let os = detectOS();
+        if (os === "MacOS") {
+            handleMacUser();
+        }
+    });
+
+    // 使用计时器来控制按钮的显示和隐藏，避免频闪
+    let timer;
+    document.addEventListener("mousemove", function (event) {
+        const button = document.querySelector(".cyberpunk-button");
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        // 获取屏幕尺寸
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        // 设置右下角区域范围
+        const buffer = 100; // 鼠标移入按钮周围100px范围时显示按钮
+        const inRightBottomCorner = (
+            mouseX > screenWidth - buffer &&
+            mouseY > screenHeight - buffer
+        );
+
+        clearTimeout(timer);
+
+        if (inRightBottomCorner) {
+            button.classList.add("show-button");
+        } else {
+            timer = setTimeout(() => {
+                button.classList.remove("show-button");
+            }, 300); // 延迟300ms隐藏按钮，避免频闪
+        }
+    });
+</script>
+
+    <canvas id="canvas"></canvas>
+    <script src="/js/topo_mag_net.js"></script>
+
+    <footer>
+        <p style="font-family: Arial, sans-serif; font-size: 18px; color: #aca9a9;">
+            -------- 最后更新于 Last updated at: {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }} -------->>
+        </p>
+    </footer>
+
+</body>
+
+
+</html>

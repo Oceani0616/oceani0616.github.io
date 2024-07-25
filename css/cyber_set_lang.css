@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Language Selector CSS for Cyberpunk Style */
+.sel-lang {
+    background: #111;
+    /* Dark background */
+    color: #0f0;
+    /* Bright green text, common in cyberpunk visuals */
+    border: 1px solid rgb(0, 238, 255);
+    /* Bright green border */
+    border-radius: 0;
+    /* Sharp edges */
+    padding: 5px;
+    outline: none;
+    box-shadow: 0 0 10px rgb(255, 0, 225);
+    /* Glowing effect */
+    text-shadow: 0 0 5px rgb(255, 208, 0);
+    /* Text glow */
+    font-family: 'Orbitron', sans-serif;
+    /* A futuristic font */
+    appearance: none;
+    /* Remove default styling */
+    cursor: pointer;
+}
+
+/* Custom arrow */
+.sel-lang {
+    background-image: linear-gradient(45deg, transparent 50%, rgb(255, 0, 132) 50%),
+        linear-gradient(-45deg, transparent 50%, rgb(229, 255, 0) 50%);
+    background-position: calc(100% + 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+}
+
+/* Styling options */
+.sel-lang option {
+    background: #222;
+    /* Darker background for options */
+    color: #0f0;
+}
+
+/* Hover effects */
+.sel-lang:hover {
+    background-color: #222;
+    /* Darker background on hover */
+    box-shadow: 0 0 15px #0f0;
+    /* Stronger glow on hover */
+}
+
+/* Focus effects */
+.sel-lang:focus {
+    border-color: #0ff;
+    /* Cyan border for focus */
+    box-shadow: 0 0 15px #0ff;
+    /* Cyan glow for focus */
+}
+

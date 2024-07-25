@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'fzmOldTypewriter';
+	src: local('fzmOldTypewriter'), url('./fzmOldTypewriter.woff') format('woff');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_1383">Text with this font applied</p> */
+.fontsforweb_fontid_1383 {
+	font-family: 'fzmOldTypewriter' !important;
+}
+
+/* Font downloaded from FontsForWeb.com */

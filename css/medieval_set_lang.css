@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* 包含中世纪风格的CSS文件 */
+
+.sel-lang {
+    font-family: 'MedievalSharp', cursive;
+    background: #f4e3d7;
+    color: #5d3a00;
+    border: 1px solid #a67e2e;
+    border-radius: 5px;
+    padding: 10px 15px;
+    /* 增加内边距以提供更多空间 */
+    cursor: pointer;
+    appearance: none;
+    /* 移除原生下拉菜单的样式 */
+    -webkit-appearance: none;
+    /* 针对WebKit浏览器 */
+    -moz-appearance: none;
+    /* 针对Firefox浏览器 */
+    background-image: url('../_include/asset/Edmund_blair_leighton_accolade.jpg');
+    /* 添加一个下拉箭头图标 */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    /* 箭头图标的位置 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* 添加轻微阴影以增加深度感 */
+}
+/* 当下拉菜单被悬停时 */
+.sel-lang:hover {
+    background-color: #812222;
+}
+/* 改变select框在被点击时的样式 */
+.sel-lang:focus {
+    outline: none;
+    box-shadow: 0 0 10px #a67e2e;
+    /* 金色光晕效果 */
+}
+
+/* 增加选项的样式 */
+.sel-lang option {
+    background-color: white;
+    /* 选项的背景色 */
+    color: #5d3a00;
+    /* 选项的文字颜色 */
+}
+
